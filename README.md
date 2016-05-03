@@ -1,5 +1,5 @@
 # processing_fastsimcoal_to_fasta
-Taking the concatenated arlequin file from fastsimcoal and splitting by locus
+Taking the concatenated arlequin file from fastsimcoal and splitting by locus. Assumes you've simulated two copies per lineage (i.e. alleles)
 
 Need to change parameters in parameter block before running
 
@@ -22,20 +22,30 @@ setwd(workingdir)
 arlfile <- readLines(scenarioname)
 notaxa <- sum(grepl("SampleData",arlfile))
 nobases <- noofloci*locuslength
-tempframe <- matrix(NA,nrow=notaxa,ncol=nobases)
+tempframe <- matrix(NA,nrow=(notaxa*2),ncol=nobases)
 
 j <- 1
 for (i in 1:length(arlfile)) {
 if (grepl("SampleData",arlfile[i],fixed=TRUE)==TRUE) {
 temp <- unlist(strsplit(arlfile[i+1],"\\s+"))
 tempframe[j,] <- unlist(strsplit(temp[3],""))
-j <- j+1
+temp <- unlist(strsplit(arlfile[i+2],"\\s+"))
+tempframe[(j+1),] <- unlist(strsplit(temp[3],""))
+j <- j+2
 }
 }
 
-taxaname <- as.matrix(read.table(deffile))[1,]
-taxaname <- paste(">",taxaname,sep="")
+taxaname <- matrix(NA,nrow=(notaxa*2),ncol=1)
+temptaxaname <- as.matrix(read.table(deffile))[1,]
+j <- 1
+for (i in 1:length(temptaxaname)) {
+taxaname[j,1] <- paste(">",temptaxaname[i],"_1",sep="")
+taxaname[(j+1),1] <- paste(">",temptaxaname[i],"_2",sep="")
+j <- j+2
+}
+
 missing <- paste(rep.int("?",750),collapse="")
+notaxa <- notaxa*2
 
 j <- 1
 l <- 1
