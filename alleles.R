@@ -38,7 +38,7 @@ taxaname[(j+1),1] <- paste(">",temptaxaname[i],"_2",sep="")
 j <- j+2
 }
 
-missing <- paste(rep.int("?",750),collapse="")
+missing <- paste(rep.int("?",locuslength),collapse="")
 notaxa <- notaxa*2
 
 j <- 1
@@ -55,7 +55,7 @@ temp[(k*2),1] <- missing
 temp[(k*2),1] <- paste(tempframe[k,l:(l+749)],collapse="")
 }
 }
-l <- l+750
+l <- l+locuslength
 write.table(temp, name,quote=FALSE, col.names=FALSE,row.names=FALSE, append=TRUE)
 }
 
@@ -71,7 +71,7 @@ temp[(k*2),1] <- missing
 temp[(k*2),1] <- paste(tempframe[k,l:(l+749)],collapse="")
 }
 }
-l <- l+750
+l <- l+locuslength
 write.table(temp, name,quote=FALSE, col.names=FALSE,row.names=FALSE, append=TRUE)
 }
 
@@ -87,7 +87,7 @@ temp[(k*2),1] <- missing
 temp[(k*2),1] <- paste(tempframe[k,l:(l+749)],collapse="")
 }
 }
-l <- l+750
+l <- l+locuslength
 write.table(temp, name,quote=FALSE, col.names=FALSE,row.names=FALSE, append=TRUE)
 }
 
@@ -103,7 +103,7 @@ temp[(k*2),1] <- missing
 temp[(k*2),1] <- paste(tempframe[k,l:(l+749)],collapse="")
 }
 }
-l <- l+750
+l <- l+locuslength
 write.table(temp, name,quote=FALSE, col.names=FALSE,row.names=FALSE, append=TRUE)
 }
 
@@ -119,7 +119,7 @@ temp[(k*2),1] <- missing
 temp[(k*2),1] <- paste(tempframe[k,l:(l+749)],collapse="")
 }
 }
-l <- l+750
+l <- l+locuslength
 write.table(temp, name,quote=FALSE, col.names=FALSE,row.names=FALSE, append=TRUE)
 }
 
@@ -131,6 +131,6 @@ temp[seq(1,(notaxa*2),2),1] <- taxaname
 for (k in 1:notaxa) {
 temp[(k*2),1] <- paste(tempframe[k,l:(l+749)],collapse="")
 }
-l <- l+750
+l <- l+locuslength
 write.table(temp, name,quote=FALSE, col.names=FALSE,row.names=FALSE, append=TRUE)
 }
